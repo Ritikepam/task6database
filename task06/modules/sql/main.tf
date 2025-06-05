@@ -15,10 +15,10 @@ resource "azurerm_mssql_server" "sql" {
 }
 
 resource "azurerm_mssql_database" "sql_db" {
-  name      = var.sql_db_name
-  server_id = azurerm_mssql_server.sql.id
-  sku_name  = var.sql_db_sku
-  tags      = var.tags
+  name       = var.sql_db_name
+  server_id  = azurerm_mssql_server.sql.id
+  sku_name   = var.sql_db_sku
+  tags       = var.tags
   depends_on = [azurerm_mssql_server.sql]
 }
 
