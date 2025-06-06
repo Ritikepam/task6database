@@ -1,5 +1,5 @@
 name_prefix          = "cmaz-9m9bm0bv-mod6"
-location             = "East US"
+location             = "westus2"
 key_vault_rg_name    = "cmaz-9m9bm0bv-mod6-kv-rg"
 key_vault_name       = "cmaz-9m9bm0bv-mod6-kv"
 sql_db_sku           = "S2"

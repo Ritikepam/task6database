@@ -1,9 +1,3 @@
-resource "random_password" "sql_password" {
-  length           = 16
-  special          = true
-  override_special = "!@#$%"
-}
-
 resource "azurerm_mssql_server" "sql" {
   name                         = var.sql_server_name
   resource_group_name          = var.resource_group_name
@@ -15,11 +9,10 @@ resource "azurerm_mssql_server" "sql" {
 }
 
 resource "azurerm_mssql_database" "sql_db" {
-  name       = var.sql_db_name
-  server_id  = azurerm_mssql_server.sql.id
-  sku_name   = var.sql_db_sku
-  tags       = var.tags
-  depends_on = [azurerm_mssql_server.sql]
+  name      = var.sql_db_name
+  server_id = azurerm_mssql_server.sql.id
+  sku_name  = var.sql_db_sku
+  tags      = var.tags
 }
 
 resource "azurerm_mssql_firewall_rule" "allow_azure_services" {
@@ -27,7 +20,6 @@ resource "azurerm_mssql_firewall_rule" "allow_azure_services" {
   server_id        = azurerm_mssql_server.sql.id
   start_ip_address = "0.0.0.0"
   end_ip_address   = "0.0.0.0"
-  depends_on       = [azurerm_mssql_server.sql]
 }
 
 resource "azurerm_mssql_firewall_rule" "allow_verification_ip" {
@@ -35,7 +27,12 @@ resource "azurerm_mssql_firewall_rule" "allow_verification_ip" {
   server_id        = azurerm_mssql_server.sql.id
   start_ip_address = var.allowed_ip_address
   end_ip_address   = var.allowed_ip_address
-  depends_on       = [azurerm_mssql_server.sql]
+}
+
+resource "random_password" "sql_password" {
+  length           = 16
+  special          = true
+  override_special = "!@#$%"
 }
 
 resource "azurerm_key_vault_secret" "sql_admin_name" {
@@ -49,4 +46,3 @@ resource "azurerm_key_vault_secret" "sql_admin_password" {
   value        = random_password.sql_password.result
   key_vault_id = var.key_vault_id
 }
-

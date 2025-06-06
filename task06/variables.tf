@@ -20,7 +20,7 @@ variable "key_vault_name" {
 
 variable "sql_db_sku" {
   type        = string
-  description = "The SKU name for the Azure SQL Database (e.g., 'S2')."
+  description = "The SKU name for the Azure SQL Database."
 }
 
 variable "sql_admin_username" {
@@ -40,7 +40,7 @@ variable "secret_name_password" {
 
 variable "allowed_ip_address" {
   type        = string
-  description = "The IP address allowed to access the SQL Server (e.g., verification agent IP)."
+  description = "The IP address allowed to access the SQL Server."
 }
 
 variable "firewall_rule_name" {
@@ -55,10 +55,10 @@ variable "asp_sku" {
 
 variable "dotnet_version" {
   type        = string
-  description = "The .NET version for the Linux Web App (e.g., '8.0')."
+  description = "The .NET version for the Linux Web App."
 }
 
 variable "tags" {
   type        = map(string)
-  description = "A map of tags to apply to all resources (e.g., { Creator = 'user@domain.com' })."
+  description = "A map of tags to apply to all resources ."
 }
